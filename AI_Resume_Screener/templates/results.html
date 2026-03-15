@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Analysis Results</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Resume Analysis Result</h1>
+
+<div class="result-box">
+<h3>Extracted Skills</h3>
+<p class="skills">{{ skills }}</p>
+</div>
+
+<div class="result-box">
+<h3>Recommended Job</h3>
+<p class="job">{{ job }}</p>
+</div>
+
+<div class="result-box">
+<h3>Match Score</h3>
+<p class="score">{{ score }}</p>
+</div>
+
+<br>
+
+<a href="/">
+<button>Analyze Another Resume</button>
+</a>
+
+</div>
+
+</body>
+
+</html>
