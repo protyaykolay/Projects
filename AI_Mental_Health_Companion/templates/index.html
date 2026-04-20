@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Mental Health Companion</title>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #dfe9f3, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 380px;
+    height: 650px;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* Header */
+.chat-header {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+    color: white;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Chat Area */
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Messages */
+.message {
+    padding: 12px 15px;
+    margin: 6px 0;
+    border-radius: 15px;
+    max-width: 75%;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.user {
+    background: #d1fae5;
+    align-self: flex-end;
+}
+
+.bot {
+    background: #f3f4f6;
+    align-self: flex-start;
+}
+
+/* Input */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fafafa;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.chat-input button {
+    margin-left: 8px;
+    padding: 10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Buttons */
+.send-btn {
+    background: #14b8a6;
+    color: white;
+}
+
+.mic-btn {
+    background: #e5e7eb;
+}
+
+/* Chart */
+.chart-container {
+    padding: 10px;
+    background: #f9fafb;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(5px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="chat-header">
+        AI Mental Health Companion 💙
+    </div>
+
+    <div class="chat-box" id="chatBox"></div>
+
+    <div class="chat-input">
+        <input type="text" id="msg" placeholder="Type a message...">
+        <button class="mic-btn" onclick="startListening()">🎤</button>
+        <button class="send-btn" onclick="sendMessage()">➤</button>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="moodChart"></canvas>
+    </div>
+
+</div>
+
+<script>
+let moodData = { happy: 0, sad: 0, stress: 0 };
+
+function addMessage(text, className) {
+    let div = document.createElement("div");
+    div.className = "message " + className;
+    div.innerText = text;
+    document.getElementById("chatBox").appendChild(div);
+
+    document.getElementById("chatBox").scrollTop =
+        document.getElementById("chatBox").scrollHeight;
+}
+
+// 🎤 Voice Input
+function startListening() {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        let text = event.results[0][0].transcript;
+        document.getElementById("msg").value = text;
+        sendMessage();
+    };
+}
+
+// 🔊 Voice Output
+function speak(text) {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    window.speechSynthesis.speak(speech);
+}
+
+function sendMessage() {
+    let msg = document.getElementById("msg").value;
+    if (msg.trim() === "") return;
+
+    addMessage(msg, "user");
+    document.getElementById("msg").value = "";
+
+    let typing = document.createElement("div");
+    typing.className = "message bot";
+    typing.innerText = "Typing...";
+    document.getElementById("chatBox").appendChild(typing);
+
+    fetch(`/chat?message=${msg}`)
+    .then(res => res.json())
+    .then(data => {
+        typing.remove();
+        addMessage(data.reply, "bot");
+
+        speak(data.reply);
+
+        if (moodData[data.emotion] !== undefined) {
+            moodData[data.emotion]++;
+            updateChart();
+        }
+    });
+}
+
+// Enter key
+document.getElementById("msg").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") sendMessage();
+});
+
+// 📊 Chart
+const ctx = document.getElementById('moodChart').getContext('2d');
+const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Happy', 'Sad', 'Stress'],
+        datasets: [{
+            label: 'Mood Tracker',
+            data: [0, 0, 0]
+        }]
+    }
+});
+
+function updateChart() {
+    chart.data.datasets[0].data = [
+        moodData.happy,
+        moodData.sad,
+        moodData.stress
+    ];
+    chart.update();
+}
+</script>
+
+</body>
+</html>
