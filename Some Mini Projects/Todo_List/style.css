@@ -1,0 +1,256 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f6f8;
+
+    padding: 20px;
+}
+
+
+.container {
+    max-width: 700px;
+
+    margin: auto;
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+}
+
+
+h1 {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+/* Add Task */
+
+.add-task-section {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+#taskInput {
+    flex: 1;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    font-size: 16px;
+}
+
+
+#addButton {
+    padding: 12px 20px;
+
+    background-color: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+#addButton:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* Search */
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+
+#searchInput {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    font-size: 16px;
+}
+
+
+/* Filters */
+
+.filter-section {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.filter-btn {
+    padding: 8px 15px;
+
+    border: 1px solid #ccc;
+
+    background-color: white;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+.filter-btn:hover {
+    background-color: #f1f5f9;
+}
+
+
+.filter-btn.active {
+    background-color: #2563eb;
+
+    color: white;
+
+    border-color: #2563eb;
+}
+
+
+/* Task List */
+
+#taskList {
+    list-style: none;
+}
+
+
+.task-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+
+.task-left {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex: 1;
+}
+
+
+.task-text {
+    font-size: 16px;
+}
+
+
+.completed {
+    text-decoration: line-through;
+
+    color: #777;
+}
+
+
+.task-actions {
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.edit-btn {
+    padding: 7px 10px;
+
+    background-color: #f59e0b;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+
+.delete-btn {
+    padding: 7px 10px;
+
+    background-color: #dc2626;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+
+.edit-btn:hover {
+    background-color: #d97706;
+}
+
+
+.delete-btn:hover {
+    background-color: #b91c1c;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 600px) {
+
+    .add-task-section {
+        flex-direction: column;
+    }
+
+
+    .filter-section {
+        flex-wrap: wrap;
+    }
+
+
+    .task-item {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .task-actions {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Employee Management System</h1>
+
+
+        <!-- Add Employee Section -->
+
+        <div class="form-section">
+
+            <h2>Add Employee</h2>
+
+            <form id="employeeForm">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Employee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter employee name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="employeeId">
+                        Employee ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="employeeId"
+                        placeholder="Enter employee ID"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="department">
+                        Department
+                    </label>
+
+                    <select id="department">
+
+                        <option value="CSE">
+                            CSE
+                        </option>
+
+                        <option value="HR">
+                            HR
+                        </option>
+
+                        <option value="Finance">
+                            Finance
+                        </option>
+
+                        <option value="Marketing">
+                            Marketing
+                        </option>
+
+                        <option value="Sales">
+                            Sales
+                        </option>
+
+                        <option value="IT">
+                            IT
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="salary">
+                        Salary
+                    </label>
+
+                    <input
+                        type="number"
+                        id="salary"
+                        placeholder="Enter salary"
+                        min="0"
+                    >
+
+                </div>
+
+
+                <button type="submit" id="addButton">
+                    Add Employee
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- Employee Count -->
+
+        <div class="summary-section">
+
+            <h2>Total Employees</h2>
+
+            <p id="employeeCount">0</p>
+
+        </div>
+
+
+        <!-- Search and Filter -->
+
+        <div class="search-filter-section">
+
+            <div class="search-box">
+
+                <label for="searchInput">
+                    Search Employee
+                </label>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by name or ID..."
+                >
+
+            </div>
+
+
+            <div class="filter-box">
+
+                <label for="filterDepartment">
+                    Filter by Department
+                </label>
+
+                <select id="filterDepartment">
+
+                    <option value="All">
+                        All Departments
+                    </option>
+
+                    <option value="CSE">
+                        CSE
+                    </option>
+
+                    <option value="HR">
+                        HR
+                    </option>
+
+                    <option value="Finance">
+                        Finance
+                    </option>
+
+                    <option value="Marketing">
+                        Marketing
+                    </option>
+
+                    <option value="Sales">
+                        Sales
+                    </option>
+
+                    <option value="IT">
+                        IT
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Employee Table -->
+
+        <div class="table-section">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Employee ID</th>
+
+                        <th>Email</th>
+
+                        <th>Department</th>
+
+                        <th>Salary</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="employeeList">
+
+                    <!-- Employees will appear here -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

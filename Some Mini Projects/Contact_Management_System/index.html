@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Contact Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>Contact Management System</h1>
+
+
+        <!-- Add Contact Section -->
+
+        <div class="form-section">
+
+            <h2>Add Contact</h2>
+
+
+            <form id="contactForm">
+
+
+                <!-- Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter name"
+                    >
+
+                </div>
+
+
+                <!-- Phone -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter phone number"
+                    >
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                    >
+
+                </div>
+
+
+                <!-- Address -->
+
+                <div class="form-group">
+
+                    <label for="address">
+                        Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        placeholder="Enter address"
+                        rows="3"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Button -->
+
+                <button
+                    type="submit"
+                    id="addButton"
+                >
+                    Add Contact
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+        <!-- Search Section -->
+
+        <div class="search-section">
+
+            <label for="searchInput">
+                Search Contact
+            </label>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by name, phone or email..."
+            >
+
+        </div>
+
+
+        <!-- Contact Table -->
+
+        <div class="table-section">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Phone</th>
+
+                        <th>Email</th>
+
+                        <th>Address</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="contactList">
+
+                    <!-- Contacts will appear here -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
