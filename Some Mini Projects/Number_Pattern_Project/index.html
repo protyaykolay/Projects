@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Number Pattern Generator</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            width: 650px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            padding: 15px;
+            font-size: 18px;
+            overflow-x: auto;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>Number Pattern Generator</h1>
+
+        <input
+            type="number"
+            id="numberInput"
+            placeholder="Enter number 10-999"
+        >
+
+        <button onclick="processNumber()">Generate</button>
+
+        <div id="output"></div>
+
+    </div>
+
+
+    <script>
+
+        function processNumber() {
+
+            // Step 1: Take input
+            let n = Number(document.getElementById("numberInput").value);
+
+
+            // Step 1: Validate input
+            if (n < 10 || n > 999 || !Number.isInteger(n)) {
+
+                document.getElementById("output").innerHTML =
+                    "<p class='error'>Invalid input! Enter a number from 10 to 999.</p>";
+
+                return;
+            }
+
+
+            // Step 2: Reverse N
+            let reverse = Number(String(n).split("").reverse().join(""));
+
+
+            // Step 2: Calculate SUM
+            let sum = n + reverse;
+
+
+            // Step 3: Mirrored Number Pyramid
+            // Height = number of digits in SUM
+            let pyramidHeight = String(sum).length;
+
+            let pyramid = "";
+
+
+            for (let i = 1; i <= pyramidHeight; i++) {
+
+                // Left side
+                for (let j = 1; j <= i; j++) {
+                    pyramid += j + " ";
+                }
+
+
+                // Right side
+                for (let j = i - 1; j >= 1; j--) {
+                    pyramid += j + " ";
+                }
+
+
+                pyramid += "\n";
+            }
+
+
+            // Step 4: Hollow Diamond
+            // Height = (SUM % 5) + 5
+
+            let diamondHeight = (sum % 5) + 5;
+
+            let diamond = "";
+
+            let middle = Math.ceil(diamondHeight / 2);
+
+
+            for (let i = 1; i <= diamondHeight; i++) {
+
+                let row;
+
+                if (i <= middle) {
+                    row = i;
+                } else {
+                    row = diamondHeight - i + 1;
+                }
+
+
+                // Spaces before stars
+                for (let j = row; j < middle; j++) {
+                    diamond += " ";
+                }
+
+
+                // First half or last row
+                if (row == 1 || row == middle) {
+
+                    for (let j = 1; j <= (2 * row - 1); j++) {
+                        diamond += "*";
+                    }
+
+                } else {
+
+                    // Hollow part
+                    diamond += "*";
+
+                    for (let j = 1; j <= (2 * row - 3); j++) {
+                        diamond += " ";
+                    }
+
+                    diamond += "*";
+                }
+
+
+                diamond += "\n";
+            }
+
+
+            // Step 5: Check EVEN or ODD
+            let structure;
+
+            if (sum % 2 == 0) {
+                structure = "EVEN STRUCTURE";
+            } else {
+                structure = "ODD STRUCTURE";
+            }
+
+
+            // Display output
+            document.getElementById("output").innerHTML = `
+
+                <h2>Results</h2>
+
+                <p><b>Input N:</b> ${n}</p>
+
+                <p><b>Reverse:</b> ${reverse}</p>
+
+                <p><b>SUM:</b> ${sum}</p>
+
+                <h3>Mirrored Number Pyramid</h3>
+
+                <p><b>Height:</b> ${pyramidHeight}</p>
+
+                <pre>${pyramid}</pre>
+
+                <h3>Hollow Diamond</h3>
+
+                <p><b>Height:</b> ${diamondHeight}</p>
+
+                <pre>${diamond}</pre>
+
+                <h2 class="success">${structure}</h2>
+
+            `;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

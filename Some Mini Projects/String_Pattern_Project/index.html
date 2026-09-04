@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>String Pattern Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            width: 600px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #output {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>String Pattern Generator</h1>
+
+        <input type="text" id="userInput" placeholder="Enter 3-10 letters">
+
+        <button onclick="processString()">Generate</button>
+
+        <div id="output"></div>
+
+    </div>
+
+
+    <script>
+
+        function processString() {
+
+            // Step 1: Take input
+            let str = document.getElementById("userInput").value;
+
+            // Step 1: Validate input
+            if (!/^[A-Za-z]{3,10}$/.test(str)) {
+
+                document.getElementById("output").innerHTML =
+                    "<p class='error'>Invalid input! Enter only 3-10 alphabet characters.</p>";
+
+                return;
+            }
+
+
+            // Step 2: Convert string to uppercase
+            let upper = str.toUpperCase();
+
+
+            // Step 3: Count vowels and consonants
+            let vowels = 0;
+            let consonants = 0;
+
+            for (let ch of upper) {
+
+                if ("AEIOU".includes(ch)) {
+                    vowels++;
+                } else {
+                    consonants++;
+                }
+
+            }
+
+
+            // Step 4: Pattern 1 - Reverse Alphabet Ladder
+            let pattern1 = "";
+
+            for (let i = upper.length - 1; i >= 0; i--) {
+
+                for (let j = i; j >= 0; j--) {
+                    pattern1 += upper[j] + " ";
+                }
+
+                pattern1 += "\n";
+            }
+
+
+            // Step 5: Pattern 2 - Hollow Square
+            let size = vowels + 3;
+            let pattern2 = "";
+
+            for (let i = 1; i <= size; i++) {
+
+                for (let j = 1; j <= size; j++) {
+
+                    if (i == 1 || i == size || j == 1 || j == size) {
+                        pattern2 += "* ";
+                    } else {
+                        pattern2 += "  ";
+                    }
+
+                }
+
+                pattern2 += "\n";
+            }
+
+
+            // Step 6: Vowel or Consonant Dominant
+            let result;
+
+            if (vowels > consonants) {
+                result = "VOWEL DOMINANT";
+            } else {
+                result = "CONSONANT DOMINANT";
+            }
+
+
+            // Display output
+            document.getElementById("output").innerHTML = `
+
+                <h2>Results</h2>
+
+                <p><b>Original String:</b> ${str}</p>
+
+                <p><b>Uppercase String:</b> ${upper}</p>
+
+                <p><b>Total Vowels:</b> ${vowels}</p>
+
+                <p><b>Total Consonants:</b> ${consonants}</p>
+
+                <h3>Pattern 1 - Reverse Alphabet Ladder</h3>
+
+                <pre>${pattern1}</pre>
+
+                <h3>Pattern 2 - Hollow Square</h3>
+
+                <p><b>Square Size:</b> ${size} × ${size}</p>
+
+                <pre>${pattern2}</pre>
+
+                <h2>${result}</h2>
+
+            `;
+        }
+
+    </script>
+
+</body>
+
+</html>
